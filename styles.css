@@ -342,10 +342,30 @@ body {
   gap: 8rem;
 }
 
+
+/* Add this to your CSS */
+.fully-loaded .project-card {
+  opacity: 1;
+  transform: translateY(0);
+  transition: none; /* Prevents fade-out on reload */
+}
+
+
 .project-card {
   display: flex;
   flex-direction: column;
   gap: 2rem;
+}
+
+.project-card {
+  animation: makeVisible 0.5s 2s forwards;
+}
+
+@keyframes makeVisible {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 @media (min-width: 768px) {
@@ -492,16 +512,47 @@ body {
 }
 
 /* Animations */
+/* Add this to your styles.css file */
 .reveal-content {
   opacity: 0;
   transform: translateY(30px);
   transition: opacity 0.6s ease-out, transform 0.6s ease-out;
 }
 
-.reveal-content.is-visible {
+.is-visible, /* Keep this class for JavaScript toggling */
+.reveal-content:nth-child(odd) { /* This ensures content is visible regardless of JS */
   opacity: 1;
   transform: translateY(0);
 }
+
+/* Add a slight delay for even-numbered elements for a staggered effect */
+.reveal-content:nth-child(even) {
+  transition-delay: 0.2s;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+
+.project-card {
+  opacity: 0;
+  transform: translateY(50px);
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.project-card.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Add an interim solution to ensure visibility regardless of JS */
+@media (max-width: 768px) {
+  .project-card {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
 
 .delay-200 {
   transition-delay: 0.2s;

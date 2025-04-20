@@ -285,18 +285,83 @@ function initScrollAnimations() {
   })
 }
 
+
+function revealProjects() {
+  const projectCards = document.querySelectorAll('.project-card');
+  const windowHeight = window.innerHeight;
+  
+  projectCards.forEach(card => {
+    const cardTop = card.getBoundingClientRect().top;
+    
+    // If already scrolled past this point or close to it, make visible
+    if (cardTop < windowHeight * 1.2) {
+      card.classList.add('is-visible');
+      // Once visible, stay visible by removing the transition
+      setTimeout(() => {
+        card.style.transition = 'none';
+      }, 1000);
+    }
+  });
+}
+
+// Call this immediately after page load and on scroll
+document.addEventListener('DOMContentLoaded', function() {
+  revealProjects();
+  window.addEventListener('scroll', revealProjects);
+});
+
+
+
+document.addEventListener("DOMContentLoaded", () => {
+  // Check if we have a stored scroll position
+  const storedScrollY = sessionStorage.getItem('lastScrollY');
+  if (storedScrollY) {
+    // Force all project cards to be visible if user has scrolled before
+    document.querySelectorAll('.project-card').forEach(card => {
+      card.classList.add('is-visible');
+    });
+  }
+  
+  // Store scroll position when unloading the page
+  window.addEventListener('beforeunload', () => {
+    sessionStorage.setItem('lastScrollY', window.scrollY);
+  });
+});
+
+
+
 // Basic scroll reveal fallback (no GSAP)
 function basicScrollReveal() {
-  const revealElements = document.querySelectorAll(".reveal-content")
-  const windowHeight = window.innerHeight
+  const revealElements = document.querySelectorAll('.reveal-content');
+  const windowHeight = window.innerHeight;
 
-  revealElements.forEach((element) => {
-    const elementTop = element.getBoundingClientRect().top
-    if (elementTop < windowHeight * 0.8) {
-      element.classList.add("is-visible")
+  revealElements.forEach(element => {
+    const elementTop = element.getBoundingClientRect().top;
+    // Make the threshold more generous (1.0 means fully visible)
+    if (elementTop < windowHeight * 1.0) {
+      element.classList.add('is-visible');
     }
-  })
+  });
 }
+
+
+document.addEventListener('DOMContentLoaded', function() {
+  basicScrollReveal();
+  // Add scroll event listener to check continuously while scrolling
+  window.addEventListener('scroll', basicScrollReveal);
+});
+
+
+
+document.addEventListener("DOMContentLoaded", () => {
+  console.log("GSAP loaded:", typeof gsap !== "undefined");
+  console.log("ScrollTrigger loaded:", typeof ScrollTrigger !== "undefined");
+  
+  // Rest of your code...
+});
+
+
+
 
 // Animate skill bars
 function animateSkillBars() {
