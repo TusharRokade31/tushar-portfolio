@@ -46,25 +46,25 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // Form submission
-  const contactForm = document.getElementById("contact-form")
-  if (contactForm) {
-    contactForm.addEventListener("submit", (e) => {
-      e.preventDefault()
+  // const contactForm = document.getElementById("contact-form")
+  // if (contactForm) {
+  //   contactForm.addEventListener("submit", (e) => {
+  //     e.preventDefault()
 
-      // Get form values
-      const name = document.getElementById("name").value
-      const email = document.getElementById("email").value
-      const subject = document.getElementById("subject").value
-      const message = document.getElementById("message").value
+  //     // Get form values
+  //     const name = document.getElementById("name").value
+  //     const email = document.getElementById("email").value
+  //     const subject = document.getElementById("subject").value
+  //     const message = document.getElementById("message").value
 
-      // Here you would typically send the form data to a server
-      // For now, we'll just show an alert
-      alert(`Thank you for your message, ${name}! I'll get back to you soon.`)
+  //     // Here you would typically send the form data to a server
+  //     // For now, we'll just show an alert
+  //     alert(`Thank you for your message, ${name}! I'll get back to you soon.`)
 
-      // Reset form
-      contactForm.reset()
-    })
-  }
+  //     // Reset form
+  //     contactForm.reset()
+  //   })
+  // }
 
   // Initialize particles.js for background effect
   if (typeof particlesJS !== "undefined") {
